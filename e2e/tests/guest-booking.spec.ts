@@ -67,3 +67,16 @@ test('guest sees an error when the slot was just taken', async ({ page }) => {
 
   await expect(page.locator('.error')).toContainText('Этот слот уже занят');
 });
+
+test('the last day of the booking window loads without error', async ({ page }) => {
+  const type = await seedEventType('Окно', 60);
+
+  await page.goto(`/event-types/${type.id}`);
+  await expect(page.locator('.days button')).toHaveCount(14);
+
+  // The 14th day is still inside the server window: no 400, no stuck spinner.
+  await page.locator('.days button').last().click();
+  await expect(page.locator('.days .day-button.active')).toHaveCount(1);
+  await expect(page.locator('.slots .slot').first()).toBeVisible();
+  await expect(page.locator('.error')).toHaveCount(0);
+});
