@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Hexlet course project (`ai-for-developers-project-386`). API design lives in `tsp/` (TypeSpec, `tspconfig.yaml` at repo root) as a spec only. Frontend lives in `frontend/` (React 18 + Vite 6 + TypeScript, react-router 6). Backend lives in `backend/` (Node.js 20 + Express + TypeScript, ESM, in-memory storage) and implements the contract API exactly — do not add endpoints or change paths/payloads without changing the spec first.
+Hexlet course project (`ai-for-developers-project-387`). API design lives in `tsp/` (TypeSpec, `tspconfig.yaml` at repo root) as a spec only. Frontend lives in `frontend/` (React 18 + Vite 6 + TypeScript, react-router 6). Backend lives in `backend/` (Node.js 20 + Express + TypeScript, ESM, in-memory storage) and implements the contract API exactly — do not add endpoints or change paths/payloads without changing the spec first.
 
 ## Backend
 
