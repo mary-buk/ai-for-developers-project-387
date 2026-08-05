@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/mary-buk/ai-for-developers-project-387/compare/v0.2.2...v0.2.3) (2026-08-05)
+
+
+### Bug Fixes
+
+* configure opencode git permissions ([1baefc8](https://github.com/mary-buk/ai-for-developers-project-387/commit/1baefc80a133aa42ff2f98c10401b40e28ce661c))
+
 ## [0.2.2](https://github.com/mary-buk/ai-for-developers-project-387/compare/v0.2.1...v0.2.2) (2026-08-05)
 
 
