@@ -1,0 +1,11 @@
+# TypeSpec configuration for the calendar booking API.
+# Compile the spec with: npx tsp compile tsp
+# Requires the TypeSpec compiler and the OpenAPI3 emitter:
+#   npm install -g @typespec/compiler
+#   npm install -D @typespec/openapi3
+emit:
+  - "@typespec/openapi3"
+options:
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/generated"
+    file-type: json
