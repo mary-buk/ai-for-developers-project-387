@@ -1,7 +1,7 @@
 import { request } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3001';
 
 export interface EventTypeSeed {
   id: string;

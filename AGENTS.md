@@ -28,9 +28,9 @@ Hexlet course project (`ai-for-developers-project-387`). API design lives in `ts
 
 ## E2E, commits, releases
 
-- E2E (Playwright) lives in `e2e/` (separate package): `npm install`, `npx playwright install chromium` (once), `npm test`. Tests drive the REAL apps in a browser — no mocks; Playwright's `webServer` starts backend (:3000) and frontend (:5173) itself and reuses already-running ones locally.
+- E2E (Playwright) lives in `e2e/` (separate package): `npm install`, `npx playwright install chromium` (once), `npm test`. Tests drive the REAL apps in a browser — no mocks; Playwright's `webServer` starts backend (:3001) and frontend (:5174) itself on dedicated test ports and never reuses running servers (a reused server could be stale or, worse, another project's dev process squatting on the default port).
 - `workers: 1` on purpose: backend state is in-memory and shared between tests. Seed data via API helpers (`e2e/tests/helpers.ts`), never through the UI. Tests always book TOMORROW (today's slots depend on the time of day).
-- `00-empty-state.spec.ts` assumes an empty backend — true in CI (fresh processes); locally restart the backend before the run if it already has data.
+- `00-empty-state.spec.ts` assumes an empty backend — Playwright always boots a fresh backend process on the test port, so it holds locally and in CI.
 - CI workflows: `e2e.yml` (backend unit tests + Playwright on push/PR), `conventional-commits.yml` (PR commit messages via commitlint), `release-please.yml` (release PRs/tags on pushes to main). `hexlet-check.yml` stays untouched.
 - Commits follow Conventional Commits (`feat:` / `fix:` / `chore:` / `docs:` ...). release-please uses the `simple` strategy (version in `.release-please-manifest.json`): `feat` -> minor, `fix` -> patch; merging its release PR creates the tag and GitHub release.
 

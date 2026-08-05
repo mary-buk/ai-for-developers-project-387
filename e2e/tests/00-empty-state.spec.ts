@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 // These tests assume a FRESH backend: the in-memory storage must be empty.
-// In CI webServer always starts new processes, so that holds.
-// Locally: restart the backend before running the suite if it already has data.
+// Playwright always boots a fresh backend on the test port, so that holds.
 test('home page shows the empty state when there are no event types', async ({ page }) => {
   await page.goto('/');
   await expect(
