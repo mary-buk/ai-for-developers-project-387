@@ -8,6 +8,7 @@ export const WORK_START_HOUR = 9;
 export const WORK_END_HOUR = 18;
 
 const MINUTE_MS = 60_000;
+const HOUR_MS = 3_600_000;
 const DAY_MS = 86_400_000;
 
 export interface Interval {
@@ -15,18 +16,17 @@ export interface Interval {
   end: Date;
 }
 
+// The booking window is anchored to UTC calendar days: the deployed server runs
+// UTC, and the frontend sends UTC YYYY-MM-DD dates, so using UTC here keeps the
+// window consistent no matter the process timezone.
 export function startOfDay(d: Date): Date {
-  const result = new Date(d);
-  result.setHours(0, 0, 0, 0);
-  return result;
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
 }
 
 function workdayBounds(date: Date): Interval {
   const day = startOfDay(date);
-  const start = new Date(day);
-  start.setHours(WORK_START_HOUR, 0, 0, 0);
-  const end = new Date(day);
-  end.setHours(WORK_END_HOUR, 0, 0, 0);
+  const start = new Date(day.getTime() + WORK_START_HOUR * HOUR_MS);
+  const end = new Date(day.getTime() + WORK_END_HOUR * HOUR_MS);
   return { start, end };
 }
 
@@ -43,8 +43,8 @@ export function isWithinWindow(date: Date, now: Date): boolean {
  * [start, start + duration) fits into the working window of that day.
  */
 export function isSlotOnGrid(start: Date, durationMinutes: number): boolean {
-  if (start.getMinutes() % SLOT_STEP_MINUTES !== 0) return false;
-  if (start.getSeconds() !== 0 || start.getMilliseconds() !== 0) return false;
+  if (start.getUTCMinutes() % SLOT_STEP_MINUTES !== 0) return false;
+  if (start.getUTCSeconds() !== 0 || start.getUTCMilliseconds() !== 0) return false;
 
   const { start: workStart, end: workEnd } = workdayBounds(start);
   const end = new Date(start.getTime() + durationMinutes * MINUTE_MS);
