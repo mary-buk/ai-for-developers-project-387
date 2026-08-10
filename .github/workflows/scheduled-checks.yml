@@ -51,3 +51,12 @@ jobs:
             --output=json \
             --output-path=./lighthouse/lighthouse \
             --chrome-path="$(command -v google-chrome)"
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: |
+            lighthouse/lighthouse.report.html
+            lighthouse/lighthouse.report.json
+          retention-days: 7
