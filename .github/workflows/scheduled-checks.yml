@@ -39,3 +39,15 @@ jobs:
 
       - name: Run e2e tests
         run: npm test --prefix e2e
+
+      - name: Install Lighthouse
+        run: npm install -g lighthouse
+
+      - name: Run Lighthouse
+        run: |
+          mkdir -p lighthouse
+          lighthouse https://calendar-booking-camd.onrender.com \
+            --output=html \
+            --output=json \
+            --output-path=./lighthouse/lighthouse \
+            --chrome-path="$(command -v google-chrome)"
