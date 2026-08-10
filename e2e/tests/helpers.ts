@@ -70,10 +70,16 @@ export async function fetchSlots(eventTypeId: string, date: string): Promise<Slo
   }
 }
 
-function tomorrowDate(): Date {
-  const d = new Date();
-  d.setDate(d.getDate() + 1);
-  return d;
+const DAY_MS = 86_400_000;
+
+/**
+ * Tomorrow as a UTC calendar date. The day strip and the server window are both
+ * anchored to UTC, so "tomorrow" must be computed from UTC parts too.
+ */
+function utcTomorrowDate(): Date {
+  const now = new Date();
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  return new Date(today + DAY_MS);
 }
 
 /**
@@ -81,16 +87,16 @@ function tomorrowDate(): Date {
  * day (past slots are excluded), tomorrow's are stable.
  */
 export function tomorrowISODate(): string {
-  const d = tomorrowDate();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
+  const d = utcTomorrowDate();
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
   return `${y}-${m}-${day}`;
 }
 
 /** Day-of-month of tomorrow, for clicking the calendar strip button. */
 export function tomorrowDayNumber(): number {
-  return tomorrowDate().getDate();
+  return utcTomorrowDate().getUTCDate();
 }
 
 /** Locates a day button in the 14-day calendar strip by its day-of-month. */

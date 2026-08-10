@@ -1,21 +1,25 @@
-// Date helpers for the booking window (local time display, ISO transport).
+// Date helpers for the booking window (UTC calendar day for transport,
+// local time for display).
 
-/** YYYY-MM-DD for the slots query param, without timezone shifts. */
+const DAY_MS = 86_400_000;
+
+/** YYYY-MM-DD for the slots query param — the UTC calendar day of `d`. */
 export function toISODate(d: Date): string {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
   return `${y}-${m}-${day}`;
 }
 
-/** Next `count` days starting from today (inclusive). */
+/**
+ * Next `count` days starting from today (inclusive), anchored to the UTC
+ * calendar day: the server validates the window in UTC, so the day strip must
+ * match regardless of the browser timezone.
+ */
 export function nextDays(count: number): Date[] {
-  const today = new Date();
-  return Array.from({ length: count }, (_, i) => {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
-    return d;
-  });
+  const now = new Date();
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  return Array.from({ length: count }, (_, i) => new Date(today + i * DAY_MS));
 }
 
 export function formatDayLabel(d: Date): string {

@@ -39,7 +39,7 @@ Hexlet course project (`ai-for-developers-project-387`). API design lives in `ts
 - Single image via the root `Dockerfile` (multi-stage: frontend build -> backend build -> node:20-alpine runtime, prod deps only). Express serves BOTH the API and the built frontend from `backend/public` (`/app/public` in the image, `STATIC_DIR` overrides).
 - `backend/src/app.ts` serves static + SPA fallback only when the static dir exists — in dev (tsx watch) it doesn't, so local dev is unchanged. Fallback sends `index.html` for non-API GET paths; `/event-types/:id` is a PAGE route, only `/event-types/:id/slots` and `/bookings*` stay JSON-404.
 - App honors `PORT` (default 3000) — Render/Railway inject it automatically. Image has a HEALTHCHECK on `GET /event-types`.
-- Timezone: the 09:00–18:00 window is evaluated in the SERVER timezone — UTC inside the container (node:20-alpine, no tzdata). The frontend displays slots in the browser's local TZ, so the visible window shifts accordingly. Validated image: `calendar-booking:latest` (~200MB).
+- Timezone: the 09:00–18:00 window and the 14-day booking window are anchored to UTC calendar days (server and frontend agree, independent of the process timezone — the container is UTC anyway). The frontend displays slot times in the browser's local TZ, so the visible clock hours shift accordingly. Validated image: `calendar-booking:latest` (~200MB).
 - Deploy: Render via `render.yaml` Blueprint (free plan, healthCheckPath `/event-types`, autoDeploy from main). Public URL goes into `README.md` after the first deploy.
 
 ## Hard constraints
