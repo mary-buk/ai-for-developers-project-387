@@ -50,7 +50,8 @@ jobs:
             --output=html \
             --output=json \
             --output-path=./lighthouse/lighthouse \
-            --chrome-path="$(command -v google-chrome)"
+            --chrome-path="$(command -v google-chrome)" \
+            --chrome-flags="--headless --no-sandbox --disable-gpu"
 
       - name: Upload Lighthouse report
         uses: actions/upload-artifact@v4
