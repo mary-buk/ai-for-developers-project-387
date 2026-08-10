@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.4](https://github.com/mary-buk/ai-for-developers-project-387/compare/v0.2.3...v0.2.4) (2026-08-10)
+
+
+### Bug Fixes
+
+* anchor booking window to UTC, handle expired slots, fix spinner race ([29f228b](https://github.com/mary-buk/ai-for-developers-project-387/commit/29f228b5621a0d31bd4b1f46b4bea04f26a56691))
+* load commitlint config as ESM module ([f94234f](https://github.com/mary-buk/ai-for-developers-project-387/commit/f94234f2385cb8b0ebab71e08f0084ffd578030e))
+
 ## [0.2.3](https://github.com/mary-buk/ai-for-developers-project-387/compare/v0.2.2...v0.2.3) (2026-08-05)
 
 
