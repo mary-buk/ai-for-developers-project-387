@@ -43,6 +43,21 @@ jobs:
       - name: Install Lighthouse
         run: npm install -g lighthouse
 
+      - name: Wait for app readiness
+        run: |
+          url="https://calendar-booking-camd.onrender.com/event-types"
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$url")
+            echo "attempt $i: HTTP $code"
+            if [ "$code" = "200" ]; then
+              echo "App is ready"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "App did not become ready in time" >&2
+          exit 1
+
       - name: Run Lighthouse
         run: |
           mkdir -p lighthouse
