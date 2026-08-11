@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.5](https://github.com/mary-buk/ai-for-developers-project-387/compare/v0.2.4...v0.2.5) (2026-08-11)
+
+
+### Bug Fixes
+
+* **ci:** harden opencode comment triggers ([7237eab](https://github.com/mary-buk/ai-for-developers-project-387/commit/7237eab592cedded5636a284dec28090c0730c03))
+* **ci:** remove unused opencode oidc permission ([7a36b92](https://github.com/mary-buk/ai-for-developers-project-387/commit/7a36b927adbf0e4e1d342c085e01260b307b593c))
+* **ci:** restrict e2e workflow permissions ([7f4c8ee](https://github.com/mary-buk/ai-for-developers-project-387/commit/7f4c8ee99831a67bd580c5f0b4a205dec0bfcbb7))
+* **ci:** restrict scheduled workflow permissions ([e8b2dd9](https://github.com/mary-buk/ai-for-developers-project-387/commit/e8b2dd9396fb390619e03c3608cc0bbe6349f72d))
+* **ci:** run lighthouse chrome in headless mode ([28a874d](https://github.com/mary-buk/ai-for-developers-project-387/commit/28a874d7b94d8ad115ba2422f49037ea4d367e69))
+* **ci:** wait for app readiness before lighthouse ([569ddcb](https://github.com/mary-buk/ai-for-developers-project-387/commit/569ddcb7549f8289a98e7750bfb01d1e83921bd2))
+* **frontend:** improve color contrast and add meta description ([8caef94](https://github.com/mary-buk/ai-for-developers-project-387/commit/8caef94ee8551e849c1a28578e76309d4313036e))
+
 ## [0.2.4](https://github.com/mary-buk/ai-for-developers-project-387/compare/v0.2.3...v0.2.4) (2026-08-10)
 
 
