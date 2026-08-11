@@ -2,7 +2,7 @@
   --bg-page: #f5f6f8;
   --bg-card: #ffffff;
   --text-primary: #111827;
-  --text-secondary: #6b7280;
+  --text-secondary: #667085;
   --text-muted: #9ca3af;
   --border: #e5e7eb;
   --primary: #2563eb;
@@ -17,6 +17,12 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.08);
   --transition: 150ms ease;
+}
+
+/* Mantine's default dimmed (#868e96) fails WCAG AA on white; use the design
+   token instead to keep the gray look at sufficient contrast. */
+:root[data-mantine-color-scheme='light'] {
+  --mantine-color-dimmed: var(--text-secondary);
 }
 
 body {
